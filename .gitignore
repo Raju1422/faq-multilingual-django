@@ -1,0 +1,58 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+.venv/
+.conda/
+*.egg-info/
+*.egg
+
+# Editor / IDE settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs & Debugging files
+logs/
+*.log
+*.out
+*.err
+
+# Django / Flask / Web frameworks
+*.sqlite3
+db.sqlite3
+instance/
+media/
+static/
+.env
+*.secret
+config.json
+
+# Cache & temp files
+.cache/
+*.swp
+*.swo
+*.bak
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# MyPy, PyTest & Coverage reports
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+nosetests.xml
+coverage.xml
+
+# Docker / Deployment
+docker-compose.override.yml
+.dockerignore
