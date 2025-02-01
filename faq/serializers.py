@@ -4,7 +4,7 @@ from .models import FAQ
 class FAQSerializer(serializers.ModelSerializer):
     class Meta:
         model = FAQ
-        fields =["id","question","answer","translations"]
+        fields =["id","question","answer","translations","created_at"]
         read_only_fields = ["translations"]
 
     def to_representation(self, instance):

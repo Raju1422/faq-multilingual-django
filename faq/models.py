@@ -1,11 +1,11 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from googletrans import Translator
-
 class FAQ(models.Model):
     question = models.TextField()
     answer = RichTextField()
     translations = models.JSONField(default=dict, null=True,blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
         """Automatically generate translations if missing for other languages."""
