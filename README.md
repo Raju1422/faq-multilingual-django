@@ -105,7 +105,7 @@ POST http://localhost:8000/api/faqs-create/
 {
     "message": "FAQ created successfully!",
     "data": {
-        id": 8,
+        id": 5b43f1b1-8f4e-4a7e-b6b5-2c487e58a7e1,
         "created_at": "2025-02-02T11:12:23.412311Z",
         "en": {
             "question": "What is Python?",
