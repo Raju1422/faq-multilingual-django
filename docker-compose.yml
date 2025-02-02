@@ -1,0 +1,23 @@
+services:
+  redis: 
+    image: redis:alpine
+    networks :
+      - faq_app_network
+  
+  web:
+    build : .
+    command : python manage.py runserver 
+    volumes :
+      - .:/app
+    ports : 
+      - "8000:8000"
+    depends_on :
+      - redis
+    networks:
+      - faq_app_network
+volumes :
+  sqlite_data:
+
+networks:
+  faq_app_network:
+    driver: bridge
