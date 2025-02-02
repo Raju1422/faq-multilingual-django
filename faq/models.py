@@ -31,11 +31,9 @@ class FAQ(models.Model):
                     }
 
             cache.set(cache_key, self.translations, timeout=60 * 60)  # Cached for 1 hour
-            print(cache.get(cache_key))
         else:
             # Saving cached data into new translations
             self.translations = cached_data
-            print("Data cached")
 
         super().save(*args, **kwargs)
 
