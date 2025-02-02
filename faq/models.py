@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from googletrans import Translator
+from django.core.cache import cache
 class FAQ(models.Model):
     question = models.TextField()
     answer = RichTextField()
@@ -11,17 +12,28 @@ class FAQ(models.Model):
         """Automatically generate translations if missing for other languages."""
         translator = Translator()
         languages = ['hi', 'bn', 'te'] 
-        for lang in languages:
-            if lang not in self.translations:
-                translated_question = translator.translate(self.question, dest=lang).text
-                translated_answer = translator.translate(self.answer, dest=lang).text
-                
-                self.translations[lang] = {
-                    'question': translated_question,
-                    'answer': translated_answer
-                }
+        #caching translations 
+        cache_key = f"faq_translation_{self.id}"
+        cached_data = cache.get(cache_key)
+        if not cached_data:
+            for lang in languages:
+                if lang not in self.translations:
+                    translated_question = translator.translate(self.question, dest=lang).text
+                    translated_answer = translator.translate(self.answer, dest=lang).text
+                    
+                    self.translations[lang] = {
+                        'question': translated_question,
+                        'answer': translated_answer
+                    }
 
+            cache.set(cache_key,self.translations,timeout=60*60) # cached for 1 hour
+            print(cache.get(cache_key))
+        else:
+            # saving cached data into new translations 
+            self.translations = cached_data
+            print("data cahced")
         super().save(*args, **kwargs)
+
 
     def get_translation(self, lang="en"):
         """Retrieve the question and answer in the requested language."""
