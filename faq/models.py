@@ -2,9 +2,10 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from googletrans import Translator
 from django.core.cache import cache
-
+import uuid 
 
 class FAQ(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True,primary_key=True)
     question = models.TextField()
     answer = RichTextField()
     translations = models.JSONField(default=dict, null=True, blank=True)
