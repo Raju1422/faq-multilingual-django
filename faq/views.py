@@ -23,8 +23,6 @@ class FAQView(APIView):
         except Exception as e:
             return Response({"error": "Internal server error", "message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
-        
     def post(self,request):
         try :
             serializer = FAQSerializer(data=request.data)
